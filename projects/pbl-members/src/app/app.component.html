@@ -1,0 +1,51 @@
+<div class="search-user-input" *ngIf="isAdmin">
+  <label>
+    <!--suppress TypeScriptUnresolvedVariable -->
+    <input
+      placeholder="Input username to add new member to project"
+      nz-input
+      (input)="onSearchUserInput($event.target?.value)"
+      [nzAutocomplete]="auto"
+    />
+  </label>
+  <nz-autocomplete nzBackfill #auto>
+    <nz-auto-option *ngIf="searchUserResult" [nzValue]="searchUserResult.username">
+      {{ searchUserResult.username }}
+      <a *ngIf="!isUserMember(searchUserResult.username)" class="add-to-project-link"
+         (click)="addUserToProject(searchUserResult.username)">Add to project</a>
+    </nz-auto-option>
+  </nz-autocomplete>
+</div>
+<nz-table class="member-table" #basicTable [nzData]="members">
+  <thead>
+  <tr>
+    <th>Username</th>
+    <th>Role</th>
+    <th *ngIf="isAdmin">Action</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr *ngFor="let data of members">
+    <td>{{ data.user.username }}</td>
+    <td>
+      <nz-dropdown *ngIf="isAdmin && !isSelf(data.user.username); else notAdmin">
+        <a nz-dropdown> {{data.role}} <i nz-icon type="down"></i> </a>
+        <ul nz-menu nzSelectable>
+          <li nz-menu-item *ngFor="let role of roles"
+              [nzSelected]="role === data.role"
+              (click)="changeRole(data, role)">
+            {{role}}
+          </li>
+        </ul>
+      </nz-dropdown>
+      <ng-template #notAdmin>{{data.role}}</ng-template>
+    </td>
+    <td *ngIf="isAdmin">
+      <button *ngIf="!isSelf(data.user.username)"
+              nz-popconfirm nzTitle="Are you sure to delete this member from the project?"
+              (nzOnConfirm)="removeUserFromProject(data)"
+              nz-button nzType="danger" [nzLoading]="data.removing">Delete</button>
+    </td>
+  </tr>
+  </tbody>
+</nz-table>

@@ -1,0 +1,12 @@
+<div class="app-not-trusted" *ngIf="appNotTrusted">
+  <div class="app-not-trusted-inner">
+    <p>The app is not trusted. Please trust this app to continue.</p>
+    <button nz-button (click)="trustApp()" [nzLoading]="trustAppLoading">Trust App</button>
+  </div>
+</div>
+<div class="iframe-container" *ngIf="!appNotTrusted && iframeSrc">
+  <iframe [src]="iframeSrc"></iframe>
+</div>
+<p *ngIf="appNotExist">
+  This app does not exist.
+</p>

@@ -1,0 +1,13 @@
+mutation UploadFile($projectId: ID!, $fileName: String!, $content: Upload!) {
+  uploadResource(project: $projectId, fileName: $fileName, content: $content) {
+    fileName
+    url
+  }
+}
+
+query ListResources($projectId: ID!) {
+  listResources(project: $projectId) {
+    fileName
+    url
+  }
+}

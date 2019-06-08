@@ -1,0 +1,22 @@
+mutation AddToWorkspace($projectId: ID!, $appId: String!) {
+  addToWorkspace(projectId: $projectId, appId: $appId)
+}
+
+mutation RemoveFromWorkspace($projectId: ID!, $appId: String!) {
+  removeFromWorkspace(projectId: $projectId, appId: $appId)
+}
+
+mutation CreateProject($name: String!) {
+  createProject(name: $name) {
+    id
+    name
+    userRoles {
+      user {
+        username
+      }
+      role
+    }
+    role
+    workspace
+  }
+}

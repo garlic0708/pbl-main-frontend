@@ -3,7 +3,12 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  production: false
+  production: false,
+  httpEndpoint: 'https://j4oowtw9ja.execute-api.us-west-2.amazonaws.com/dev',
+  authEndpoint: 'https://garlic-xu.auth.us-west-2.amazoncognito.com/login',
+  authClientId: '13fhbh31qgpmspg5369sr70cpr',
+  authCallbackUrl: 'http://localhost:4200/login',
+  userInfoEndpoint: 'https://garlic-xu.auth.us-west-2.amazoncognito.com/oauth2/userInfo',
 };
 
 /*

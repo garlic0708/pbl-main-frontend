@@ -1,0 +1,37 @@
+<div class="header-wrapper">
+  <span class="username-text" *ngIf="!isCollapsed">
+    {{ (currentUser | async)?.username }}
+  </span>
+</div>
+<div class="list-wrapper">
+  <nz-select class="project-select"
+             [nzLoading]="!(projects$ | async)"
+             [ngModel]="selectedProject?.id"
+             (ngModelChange)="setSelectedProject($event)">
+    <nz-option *ngFor="let project of projects$ | async"
+               nzLabel="{{project.name}}"
+               nzValue="{{project.id}}"></nz-option>
+    <nz-option nzLabel="New project..."
+               nzValue="{{-1}}"></nz-option>
+  </nz-select>
+  <ul nz-menu
+      [nzMode]="'inline'"
+      [nzInlineCollapsed]="isCollapsed">
+    <li nz-menu-item *ngFor="let appId of selectedProject?.workspace"
+        [nzSelected]="selectedAppId === appId"
+        (click)="setSelectedApp(appId)">
+      {{getAppName(appId) | async}}
+    </li>
+  </ul>
+</div>
+
+<nz-modal [nzVisible]="addProjectVisible"
+          nzTitle="Create New Project"
+          (nzOnCancel)="closeAddProject()"
+          (nzOnOk)="handleAddProject()"
+          [nzOkLoading]="addingProject">
+  <label>
+    <input nz-input [(ngModel)]="newProjectName"
+           placeholder="Name of the new project">
+  </label>
+</nz-modal>

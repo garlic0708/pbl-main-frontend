@@ -60,6 +60,11 @@
       true,
       "single"
     ],
+    "semicolon": [
+      true,
+      "always",
+      "strict-bound-class-methods"
+    ],
     "trailing-comma": false,
     "no-output-on-prefix": true,
     "use-input-property-decorator": true,
@@ -69,7 +74,17 @@
     "no-output-rename": true,
     "use-life-cycle-interface": true,
     "use-pipe-transform-interface": true,
+    "whitespace": true,
+    "variable-name": [
+      true,
+      "allow-leading-underscore"
+    ],
     "component-class-suffix": true,
     "directive-class-suffix": true
+  },
+  "linterOptions": {
+    "exclude": [
+      "**/generated/graphql.ts"
+    ]
   }
 }

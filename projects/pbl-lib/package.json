@@ -1,0 +1,17 @@
+{
+  "name": "pbl-lib",
+  "version": "0.0.1",
+  "scripts": {
+    "codegen": "graphql-codegen --config codegen.yml"
+  },
+  "peerDependencies": {
+    "@angular/common": "^7.2.0",
+    "@angular/core": "^7.2.0",
+    "graphql": "^14.2.1",
+    "apollo-link-ws": "latest",
+    "apollo-angular": "^1.5.0",
+    "subscriptions-transport-ws": "^0.9.16",
+    "amazon-cognito-identity-js": "^3.0.11",
+    "angular2-websocket": "^0.9.8"
+  }
+}

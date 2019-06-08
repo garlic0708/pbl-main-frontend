@@ -16,7 +16,16 @@
     ],
     "lib": [
       "es2018",
-      "dom"
-    ]
+      "dom",
+      "esnext.asynciterable"
+    ],
+    "paths": {
+      "pbl-lib": [
+        "dist/pbl-lib"
+      ],
+      "pbl-lib/*": [
+        "dist/pbl-lib/*"
+      ]
+    }
   }
 }

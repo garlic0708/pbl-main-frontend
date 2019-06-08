@@ -1,0 +1,48 @@
+mutation PushNotification($receiver: ID!, $content: String!) {
+  pushNotification(receiver: $receiver, content: $content) {
+    content
+  }
+}
+
+subscription NewNotification {
+  newNotification {
+    content
+  }
+}
+
+query GetMyProjects($username: String!, $cursor: String) {
+  findProjectsByUsername(username: $username, cursor: $cursor) {
+    items {
+      id
+      name
+      role
+      userRoles {
+        user {
+          username
+        }
+        role
+      }
+      workspace
+    }
+    nextCursor
+  }
+}
+
+query GetProjectDetail($projectId: ID!) {
+  getProjectById(id: $projectId) {
+    name
+    userRoles {
+      user {
+        username
+      }
+      role
+    }
+    role
+  }
+}
+
+query Me {
+  me {
+    username
+  }
+}

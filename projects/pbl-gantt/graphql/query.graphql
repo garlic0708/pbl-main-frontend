@@ -1,0 +1,30 @@
+query FindTaskByProject($project: ID!) {
+  findTaskByProject(projectId: $project) {
+    id
+    name
+    duration
+    startDate
+    progress
+    assignee {
+      username
+    }
+  }
+}
+
+mutation CreateTask($projectId: ID!, $args: UpdateTask!) {
+  createTask(projectId: $projectId, args: $args) {
+    id
+  }
+}
+
+mutation UpdateTask($taskId: ID!, $args: UpdateTask!) {
+  updateTask(id: $taskId, args: $args) {
+    id
+  }
+}
+
+mutation DeleteTask($taskId: ID!) {
+  deleteTask(id: $taskId) {
+    id
+  }
+}

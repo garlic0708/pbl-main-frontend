@@ -1,0 +1,23 @@
+mutation AddUserToProject($projectId: ID!, $username: String!, $role: Role!) {
+  addUserToProject(projectId: $projectId, username: $username, role: $role) {
+    id
+  }
+}
+
+mutation RemoveUserFromProject($projectId: ID!, $username: String!) {
+  removeUserFromProject(projectId: $projectId, username: $username) {
+    id
+  }
+}
+
+mutation ChangeRole($projectId: ID!, $username: String!, $role: Role!) {
+  changeRole(projectId: $projectId, username: $username, role: $role) {
+    id
+  }
+}
+
+query FindUserByUsername($username: String!) {
+  user: getUserByUsername(username: $username) {
+    username
+  }
+}

@@ -1,0 +1,20 @@
+<nz-layout>
+  <nz-header>
+    <ng-container *ngIf="selectedTaskId">
+      <span class="header-text">Assign to:</span>
+      <nz-dropdown>
+        <a nz-dropdown> {{selectedTask?.assignee}} <i nz-icon type="down"></i> </a>
+        <ul nz-menu nzSelectable>
+          <li nz-menu-item *ngFor="let user of nonInstructors"
+              [nzSelected]="selectedTask?.assignee === user.user.username"
+              (click)="assigneeClick(user.user.username)">
+            {{user.user.username}}
+          </li>
+        </ul>
+      </nz-dropdown>
+    </ng-container>
+  </nz-header>
+  <nz-content>
+    <div #gantt class='gantt-chart'></div>
+  </nz-content>
+</nz-layout>

@@ -1,0 +1,108 @@
+# This file was generated based on "graphql.schema.json". Do not edit manually.
+
+schema {
+  query: Query
+  mutation: Mutation
+  subscription: Subscription
+}
+
+type Mutation {
+  addToWorkspace(appId: String!, projectId: ID!): String!
+  addUserToProject(projectId: ID!, role: Role!, username: String!): Project!
+  changeRole(projectId: ID!, role: Role!, username: String!): Project!
+  createFolder(path: String!, project: ID!): String!
+  createProject(name: String!): Project!
+  createTask(args: UpdateTask!, projectId: ID!): Task!
+  deleteTask(id: ID!): Task!
+  pushNotification(content: String!, receiver: ID!): Notification!
+  removeFromWorkspace(appId: String!, projectId: ID!): String
+  removeUserFromProject(projectId: ID!, username: String!): Project!
+  updateTask(args: UpdateTask!, id: ID!): Task!
+  uploadResource(content: Upload!, fileName: String!, project: ID!): Resource!
+}
+
+type Notification {
+  content: String!
+}
+
+type Project {
+  id: ID!
+  name: String!
+  role: Role!
+  userRoles: [UserRole!]!
+  workspace: [String!]!
+}
+
+type ProjectConnection {
+  items: [Project!]!
+  nextCursor: String
+}
+
+type Query {
+  _empty: String
+  findProjectsByUsername(cursor: String, limit: Int, username: String): ProjectConnection!
+  findTaskByProject(projectId: ID!): [Task!]!
+  getProjectById(id: ID!): Project!
+  getUserByUsername(username: String!): User!
+  listResources(project: ID!): [Resource!]!
+  me: User!
+}
+
+type Resource {
+  fileName: String!
+  project: ID!
+  url: String
+}
+
+type Subscription {
+  newNotification: Notification
+}
+
+type Task {
+  assignee: User
+  duration: Int!
+  id: ID!
+  name: String!
+  progress: Float!
+  project: Project!
+  startDate: DateTime!
+}
+
+type User {
+  username: String!
+}
+
+type UserRole {
+  role: Role!
+  user: User!
+}
+
+enum CacheControlScope {
+  PRIVATE
+  PUBLIC
+}
+
+enum Role {
+  ADMIN
+  INSTRUCTOR
+  MEMBER
+}
+
+input UpdateTask {
+  assigneeId: ID
+  duration: Int
+  name: String
+  progress: Float
+  startDate: DateTime
+}
+
+
+"""
+A date-time string at UTC, such as 2007-12-03T10:15:30Z, compliant with the
+`date-time` format outlined in section 5.6 of the RFC 3339 profile of the ISO
+8601 standard for representation of dates and times using the Gregorian calendar.
+"""
+scalar DateTime
+
+"The `Upload` scalar type represents a file upload."
+scalar Upload

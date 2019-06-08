@@ -1,0 +1,30 @@
+<nz-layout>
+  <nz-header>
+    <nz-upload *ngIf="selectedType === 'folder'" [nzCustomRequest]="handleUpload"
+               [nzShowUploadList]="false">
+      <button nz-button>
+        <i nz-icon nzType="upload"></i><span>Upload file to this folder</span>
+      </button>
+    </nz-upload>
+    <button nz-button *ngIf="selectedType === 'file'" (click)="downloadFile(selectedNode)">
+      <i nz-icon nzType="download"></i><span>Download file</span>
+    </button>
+    <!--    <input *ngIf="selectedType === 'folder'"-->
+    <!--           type="file" (change)="uploadInputChange($event)">-->
+  </nz-header>
+  <nz-content>
+    <nz-tree [nzData]="nodes"
+             nzShowIcon [nzExpandedIcon]="multiExpandedIconTpl"
+             (nzClick)="selectNode($event)">
+      <ng-template #multiExpandedIconTpl let-node>
+        <i
+          *ngIf="!node.origin.isLeaf"
+          nz-icon
+          [type]="node.isExpanded ? 'folder-open' : 'folder'"
+          class="ant-tree-switcher-line-icon"
+        ></i>
+        <i *ngIf="node.origin.isLeaf" nz-icon type="file" class="ant-tree-switcher-line-icon"></i>
+      </ng-template>
+    </nz-tree>
+  </nz-content>
+</nz-layout>
